@@ -1,0 +1,20 @@
+[package]
+name = "custom_db_wrapper"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lib_postgres_bindgen = { git = "https://github.com/Tmando/lib_postgres_bindgen", optional = true }
+lib_sqlite_bingen = { git = "https://github.com/Tmando/lib_sqlite_bingen", optional = true }
+lib_mysql_bindgen = { git = "https://github.com/Tmando/lib_mysql_bindgen", optional = true}
+serde_json = { version = "*", optional = true}
+fake = { version = "*", features = ["derive"] }
+fakeit = {version = "*"}
+hex = {version = "*"}
+[features]
+default = ["postgres","sqlite","maria_db"]
+maria_db = ["dep:lib_mysql_bindgen","dep:serde_json"]
+sqlite = ["dep:lib_sqlite_bingen","dep:serde_json"]
+postgres = ["dep:lib_postgres_bindgen","dep:serde_json"]
