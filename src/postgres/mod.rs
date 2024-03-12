@@ -161,7 +161,7 @@ pub mod postgres{
                     CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection))
                 );
                 lib_postgres_bindgen::PQfinish(connection);
-                return serde_json::json!([]);
+                return serde_json::Value::Null;
             }
 
             let start = std::time::Instant::now();
@@ -190,7 +190,7 @@ pub mod postgres{
 
             if out_of_timeout == true {
                 println!("{:?}",String::from("Out of timeout!"));
-                return serde_json::json!([]);
+                return serde_json::Value::Null;
             }
 
             if !params.is_array() {
@@ -254,7 +254,7 @@ pub mod postgres{
                 println!("{:?}", CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection)));
                 lib_postgres_bindgen::PQclear(res);
                 lib_postgres_bindgen::PQfinish(connection);
-                return serde_json::json!([]);
+                return serde_json::Value::Null;
             }
     
             if
@@ -295,7 +295,7 @@ pub mod postgres{
                     CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection))
                 );
                 lib_postgres_bindgen::PQfinish(connection);
-                return json!([]);
+                return serde_json::Value::Null;
             }
             while
                 lib_postgres_bindgen::PQconnectPoll(connection) !=
@@ -321,7 +321,7 @@ pub mod postgres{
             {
                 println!("{:?}", CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection)));
                 lib_postgres_bindgen::PQfinish(connection);
-                return json!([]);
+                return serde_json::Value::Null;
             }
     
             if
@@ -363,7 +363,7 @@ pub mod postgres{
                     CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection))
                 );
                 lib_postgres_bindgen::PQfinish(connection);
-                return json!([]);
+                return serde_json::Value::Null;
             }
             let res = lib_postgres_bindgen::PQexec(
                 connection,
@@ -377,7 +377,7 @@ pub mod postgres{
             {
                 println!("{:?}", CStr::from_ptr(lib_postgres_bindgen::PQerrorMessage(connection)));
                 lib_postgres_bindgen::PQfinish(connection);
-                return json!([]);
+                return serde_json::Value::Null;
             }
 
             if
